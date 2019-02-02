@@ -30,8 +30,14 @@ public class TestKafkaConsumer {
         logger.info("consumerRecord:" + consumerRecord.toString());
     }
 
-    @KafkaListener(topics = {"mytopic"}, groupId = "test")
+    //如果groupId 不同那么 可以实现广播消费
+    @KafkaListener(topics = {"mytopic"}, groupId = "test1")
     public void consumer1(String message, ConsumerRecord consumerRecord) {
+        logger.info("test.message = " + message);
+        logger.info("test.consumerRecord:" + consumerRecord.toString());
+    }
+    @KafkaListener(topics = {"mytopic"}, groupId = "test2")
+    public void consumer2(String message, ConsumerRecord consumerRecord) {
         logger.info("test.message = " + message);
         logger.info("test.consumerRecord:" + consumerRecord.toString());
     }
